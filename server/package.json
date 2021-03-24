@@ -1,0 +1,12 @@
+{
+  "name": "stage-3-server",
+  "version": "1.0.0",
+  "author": "Christian Werner",
+  "license": "MIT",
+  "scripts": {
+    "start": "json-server db.json"
+  },
+  "devDependencies": {
+    "json-server": "^0.16.3"
+  }
+}
