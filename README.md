@@ -10,7 +10,7 @@ The system should consist basically in a detailed products list page with produc
 
 ## Project setup
 
-For simplification, I've added the [`json-server`](https://github.com/typicode/json-server) dependency inside `package.json` as a dev dependency.
+For simplification, I've added the [`json-server`](https://github.com/typicode/json-server) dependency inside `package.json` as a dev dependency. The recommended approach is to create a separate project to handle backend services.
 
 ```bash
 # To install all dependencies:
