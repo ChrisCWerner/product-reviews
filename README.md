@@ -9,27 +9,20 @@ As per the technical interview with Opinew, here is a simple Vuejs application t
 The system should consist basically in a detailed products list page with product name, description, image, price, reviews and other metadata.
 
 ## Project setup
-```bash
-# To install frontend dependencies:
-yarn
 
-# To install server dependency:
-cd server
+For simplification, I've added the [`json-server`](https://github.com/typicode/json-server) dependency inside `package.json` as a dev dependency.
+
+```bash
+# To install all dependencies:
 yarn
 ```
 
 ### Run locally
 ```bash
 # To start up the server, run this in the terminal:
-cd server
-yarn start
+yarn server
 
 # To start up the frontend, run this in a separate terminal:
-yarn dev
-```
-
-### Compiles and hot-reloads for development
-```bash
 yarn dev
 ```
 
