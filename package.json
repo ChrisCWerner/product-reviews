@@ -6,9 +6,10 @@
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint",
     "dev": "vue-cli-service serve",
-    "server": "json-server server/db.json"
+    "server": "json-server --watch server/db.json"
   },
   "dependencies": {
+    "axios": "^0.21.1",
     "core-js": "^3.6.5",
     "vue": "^2.6.11",
     "vue-router": "^3.2.0",
