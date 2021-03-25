@@ -16,7 +16,7 @@ export default new Vuetify({
         primary: "#05ACC2",
         "primary-variant": "#206CF5",
         accent: "#C96238",
-        background: "#EEEEEE",
+        background: "#273A5C",
       },
     },
   },
