@@ -1,5 +1,6 @@
 <template>
   <v-card tile>
+    <v-card-title v-text="name" />
     <v-row no-gutters>
       <v-col class="pa-4" cols="12" sm="3" xl="2">
         <v-row no-gutters>
@@ -21,7 +22,6 @@
       </v-col>
       <v-col cols="0" sm="9">
         <v-sheet>
-          <v-card-title v-text="name" />
           <v-card-subtitle class="pb-0 pt-4">Description</v-card-subtitle>
           <v-card-text v-text="description" />
         </v-sheet>

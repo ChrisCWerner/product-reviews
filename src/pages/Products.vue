@@ -2,7 +2,12 @@
   <v-container class="products">
     <strong class="text-h4">Products</strong>
     <!-- products list -->
-    <Product v-for="product in products" :key="product.id" v-bind="product" />
+    <Product
+      class="mb-2"
+      v-for="product in products"
+      :key="product.id"
+      v-bind="product"
+    />
     <!-- pagination control -->
   </v-container>
 </template>
