@@ -1,9 +1,20 @@
 <template>
   <v-container class="products">
-    <strong class="text-h4">Products</strong>
+    <v-card-title class="d-flex">
+      <span class="text-h5 flex-grow-1">Products</span>
+      <v-pagination
+        class="d-none d-sm-block"
+        :value="pagination._page"
+        :length="pagination.last"
+        :total-visible="5"
+        :disabled="loading"
+        @input="handlePagination"
+      />
+    </v-card-title>
     <!-- products list -->
     <Product
       class="mb-2"
+      :class="{ fade: loading }"
       v-for="product in products"
       :key="product.id"
       v-bind="product"
@@ -14,6 +25,7 @@
         :value="pagination._page"
         :length="pagination.last"
         :total-visible="10"
+        :disabled="loading"
         @input="handlePagination"
       />
     </div>
@@ -43,3 +55,9 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+.fade {
+  opacity: 0.7;
+}
+</style>
