@@ -1,11 +1,9 @@
 import client from "../api/client";
 
 const actions = {
-  async client(ctx, route = {}) {
+  async api(ctx, route = {}) {
     try {
-      const res = await client(route);
-      console.log(res);
-      return res;
+      return await client(route);
     } catch (e) {
       // TODO handle error
       console.error(e.toJSON());

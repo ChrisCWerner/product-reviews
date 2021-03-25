@@ -9,33 +9,37 @@
       v-bind="product"
     />
     <!-- pagination control -->
+    <div class="text-center">
+      <v-pagination
+        :value="pagination._page"
+        :length="pagination.last"
+        :total-visible="10"
+        @input="handlePagination"
+      />
+    </div>
   </v-container>
 </template>
 
 <script>
 import Product from "../components/Product";
+import { mapGetters } from "vuex";
+
 export default {
   name: "Products",
   components: {
     Product,
   },
-  data() {
-    return {
-      products: [],
-      pagination: {},
-    };
+  computed: {
+    ...mapGetters("Product", ["products", "loading", "pagination"]),
   },
-  async created() {
-    // TODO control api calls with vuex module
-    const res = await this.$store.dispatch("client", {
-      service: "reviews/all",
-      query: "?_page=3&_limit=5",
-    });
-    this.products = res.data;
-    this.pagination = {
-      _page: 1,
-      _limit: 5,
-    };
+  created() {
+    this.$store.dispatch("Product/fetchProducts");
+  },
+  methods: {
+    handlePagination(page) {
+      this.$store.commit("Product/SET_PAGE", page);
+      this.$store.dispatch("Product/fetchProducts");
+    },
   },
 };
 </script>
