@@ -3,8 +3,7 @@
     <strong class="text-h4 d-none d-sm-flex white--text">Shop X</strong>
     <v-text-field
       :value="search"
-      @input="handleSearch"
-      @click:clear="handleSearch('')"
+      @input="debounceSearch"
       class="mx-auto search-bar"
       color="background"
       placeholder="Type here to search..."
@@ -26,7 +25,7 @@
   </v-app-bar>
 </template>
 <script>
-import { debounce } from "@/utils/debouncer";
+import { debounce, clear } from "@/utils/debouncer";
 export default {
   name: "Navbar",
   computed: {
@@ -36,12 +35,20 @@ export default {
   },
   methods: {
     handleSearch(search) {
+      this.$store.dispatch("Product/fetchProducts", { search, page: 1 });
+    },
+    debounceSearch(search) {
+      if (search === null) return this.clearSearch();
       this.$store.commit("Product/SET_SEARCHING", true);
       debounce("search", () => {
-        this.$store.dispatch("Product/fetchProducts", { search, page: 1 });
+        this.handleSearch(search);
         if (this.$route.name !== "Products") this.$router.push("/products");
         this.$store.commit("Product/SET_SEARCHING", false);
       });
+    },
+    clearSearch() {
+      clear("search");
+      this.handleSearch("");
     },
   },
 };
