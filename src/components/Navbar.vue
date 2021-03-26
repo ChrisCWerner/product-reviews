@@ -26,6 +26,7 @@
   </v-app-bar>
 </template>
 <script>
+import { debounce } from "@/utils/debouncer";
 export default {
   name: "Navbar",
   computed: {
@@ -35,8 +36,12 @@ export default {
   },
   methods: {
     handleSearch(search) {
-      this.$store.dispatch("Product/fetchProducts", { search, page: 1 });
-      if (this.$route.name !== "Products") this.$router.push("/products");
+      this.$store.commit("Product/SET_SEARCHING", true);
+      debounce("search", () => {
+        this.$store.dispatch("Product/fetchProducts", { search, page: 1 });
+        if (this.$route.name !== "Products") this.$router.push("/products");
+        this.$store.commit("Product/SET_SEARCHING", false);
+      });
     },
   },
 };

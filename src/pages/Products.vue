@@ -7,14 +7,14 @@
         :value="pagination._page"
         :length="pagination.last"
         :total-visible="5"
-        :disabled="loading"
+        :disabled="loading || searching"
         @input="handlePagination"
       />
     </v-card-title>
     <!-- products list -->
     <Product
       class="mb-2"
-      :class="{ fade: loading }"
+      :class="{ fade: loading || searching }"
       v-for="product in products"
       :key="product.id"
       v-bind="product"
@@ -25,7 +25,7 @@
         :value="pagination._page"
         :length="pagination.last"
         :total-visible="10"
-        :disabled="loading"
+        :disabled="loading || searching"
         @input="handlePagination"
       />
     </div>
@@ -42,7 +42,12 @@ export default {
     Product,
   },
   computed: {
-    ...mapGetters("Product", ["products", "loading", "pagination"]),
+    ...mapGetters("Product", [
+      "products",
+      "loading",
+      "searching",
+      "pagination",
+    ]),
   },
   created() {
     this.$store.dispatch("Product/fetchProducts");

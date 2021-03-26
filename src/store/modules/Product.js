@@ -2,6 +2,7 @@ import { buildQuery } from "../../utils/buildQuery";
 
 const state = () => ({
   loading: false,
+  searching: false,
   products: [],
   queryFilters: {
     _page: 1,
@@ -20,6 +21,7 @@ const getters = {
   pagination: (state) => ({ ...state.queryFilters, ...state.pagination }),
   query: (state) => state.queryFilters,
   loading: (state) => state.loading,
+  searching: (state) => state.searching,
 };
 
 const mutations = {
@@ -46,6 +48,9 @@ const mutations = {
   },
   SET_LOADING(state, isLoading) {
     state.loading = isLoading;
+  },
+  SET_SEARCHING(state, isSearching) {
+    state.searching = isSearching;
   },
 };
 
