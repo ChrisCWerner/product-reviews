@@ -3,38 +3,19 @@
     <v-card-title v-text="name" />
     <v-row no-gutters>
       <v-col class="px-4" cols="12" sm="3" xl="2">
-        <!-- <v-row no-gutters>
-          <v-col cols="9" sm="12">
-            <v-img :src="image"></v-img>
-          </v-col>
-          <v-col cols="3" sm="12">
-            <div class="">
+        <v-img :src="image">
+          <div class="fill-height d-flex">
+            <div class="review-container elevation-10">
               <StarRating :stars="Number(star_rating)" />
-            </div>
-            <div class="px-1 my-n2">
-              <i class="text--secondary text-caption"
-                >from {{ review_count }} reviews</i
-              >
-            </div>
-          </v-col>
-        </v-row> -->
-        <div class="d-flex flex-row flex-sm-column">
-          <v-img class="flex-shrink-1" :src="image"></v-img>
-          <div class="align-self-end text-end" style="min-width: 120px">
-            <div class="">
-              <StarRating :stars="Number(star_rating)" />
-            </div>
-            <div class="px-1 my-n2">
-              <i class="text--secondary text-caption"
-                >from {{ review_count }} reviews</i
-              >
+              <div class="px-1 mt-n2">
+                <i class="text-caption">from {{ review_count }} reviews</i>
+              </div>
             </div>
           </div>
-        </div>
+        </v-img>
       </v-col>
       <v-col cols="0" sm="9">
-        <!-- <v-card-subtitle class="pb-0 pt-4">Description</v-card-subtitle> -->
-        <v-card-text v-text="description" />
+        <v-card-text class="pt-0" v-text="description" />
         <span class="text-h4 ml-4 mr-2">{{ price }}</span>
         <i class="text--secondary text--lighten-3"
           >{{ available_count }} available</i
@@ -76,3 +57,13 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+.review-container {
+  background: #0003;
+  color: #fffd;
+  width: 100%;
+  align-self: flex-end;
+  text-align: end;
+}
+</style>
