@@ -2,11 +2,15 @@
   <v-app-bar app color="background">
     <strong class="text-h4 d-none d-sm-flex white--text">Shop X</strong>
     <v-text-field
+      :value="search"
+      @input="handleSearch"
+      @click:clear="handleSearch('')"
       class="mx-auto search-bar"
       color="background"
       placeholder="Type here to search..."
       append-icon="mdi-magnify"
       hide-details
+      clearable
       filled
       dense
       solo
@@ -22,7 +26,20 @@
   </v-app-bar>
 </template>
 <script>
-export default {};
+export default {
+  name: "Navbar",
+  computed: {
+    search() {
+      return this.$store.getters["Product/query"].q;
+    },
+  },
+  methods: {
+    handleSearch(search) {
+      this.$store.dispatch("Product/fetchProducts", { search, page: 1 });
+      if (this.$route.name !== "Products") this.$router.push("/products");
+    },
+  },
+};
 </script>
 
 <style scoped>

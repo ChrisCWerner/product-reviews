@@ -1,6 +1,4 @@
 import { buildQuery } from "../../utils/buildQuery";
-import { numberWithinRange } from "../../utils/helpers/numberWithinRange";
-import { parseHeaderLink } from "../../utils/parseHeaderLink";
 
 const state = () => ({
   loading: false,
@@ -11,9 +9,6 @@ const state = () => ({
     q: "",
   },
   pagination: {
-    next: 0,
-    prev: 0,
-    first: 1,
     last: 1,
     total: 0,
   },
@@ -34,6 +29,9 @@ const mutations = {
   SET_PAGE(state, page) {
     state.queryFilters._page = page;
   },
+  SET_SEARCH(state, search) {
+    state.queryFilters.q = search;
+  },
   SET_PAGINATION(state, pagination = {}) {
     state.pagination = {
       ...state.pagination,
@@ -52,7 +50,7 @@ const mutations = {
 };
 
 const actions = {
-  async fetchProducts({ getters, commit, dispatch }, { page = 0 } = {}) {
+  async fetchProducts({ getters, commit, dispatch }, { page, search } = {}) {
     // checks if a request is already running and prevent new requests until finished
     if (getters.loading) return;
 
@@ -60,12 +58,11 @@ const actions = {
     commit("SET_LOADING", true);
 
     // validates page to fetch data
-    if (
-      page &&
-      numberWithinRange(page, getters.pagination.first, getters.pagination.last)
-    ) {
+    if (page >= 1 && page <= getters.pagination.last) {
       commit("SET_PAGE", page);
     }
+
+    if (typeof search === "string") commit("SET_SEARCH", search);
 
     // builds the query string from the query paramaters
     const query = buildQuery(getters.query);
@@ -81,7 +78,12 @@ const actions = {
     );
 
     // sets pagination and products data from the server response
-    commit("SET_PAGINATION", parseHeaderLink(res.headers.link));
+    const total = Number(res.headers["x-total-count"]);
+    const pagination = {
+      total,
+      last: Math.ceil(total / getters.query._limit),
+    };
+    commit("SET_PAGINATION", pagination);
     commit("SET_PRODUCTS", res.data);
 
     commit("SET_LOADING", false);

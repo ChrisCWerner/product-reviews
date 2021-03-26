@@ -49,8 +49,7 @@ export default {
   },
   methods: {
     handlePagination(page) {
-      this.$store.commit("Product/SET_PAGE", page);
-      this.$store.dispatch("Product/fetchProducts");
+      this.$store.dispatch("Product/fetchProducts", { page });
     },
   },
 };
