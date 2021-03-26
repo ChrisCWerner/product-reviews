@@ -1,5 +1,5 @@
 <template>
-  <div class="d-inline stars">
+  <div :title="stars + '/5'" class="d-inline stars">
     <v-icon
       class="star-icon"
       color="accent"

@@ -49,6 +49,7 @@ export default {
     clearSearch() {
       clear("search");
       this.handleSearch("");
+      this.$store.commit("Product/SET_SEARCHING", false);
     },
   },
 };
