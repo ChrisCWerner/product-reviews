@@ -30,6 +30,20 @@ yarn dev
 
 Now you should be able to access the web client by going to localhost:8080 in your browser.
 
+### Running with Docker/Docker-compose
+
+You can also run this project with Docker, skipping the dependency installation step. Simply run the following commands:
+
+```bash
+# build the client and server images
+docker-compose build
+
+# start up the client and server
+docker-compose up
+```
+
+The client should be running in the docker host at port 80 (default http port). Due to poor NginX configuration, the routing only works by accessing the root path "/". From there the SPA should do the rest.
+
 ### Lints and fixes files
 ```bash
 yarn lint
