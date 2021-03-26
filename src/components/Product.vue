@@ -2,17 +2,22 @@
   <v-card tile>
     <v-card-title v-text="name" />
     <v-row no-gutters>
-      <v-col class="px-4" cols="12" sm="3" xl="2">
-        <v-img :src="image">
+      <v-col class="px-4 mb-2" cols="12" sm="3" xl="2">
+        <v-img max-height="260" :src="image" contain>
           <div class="fill-height d-flex">
             <div class="review-container elevation-10">
               <StarRating :stars="Number(star_rating)" />
               <div class="px-1 mt-n2">
-                <i class="text-caption">from {{ review_count }} reviews</i>
+                <span class="text-caption"
+                  >from {{ review_count }} reviews</span
+                >
               </div>
             </div>
           </div>
         </v-img>
+        <i class="text-caption text--secondary"
+          >Seller: <b>{{ seller_name }}</b></i
+        >
       </v-col>
       <v-col cols="0" sm="9">
         <v-card-text class="pt-0" v-text="description" />
@@ -41,16 +46,16 @@ import StarRating from "./StarRating";
 export default {
   props: {
     id: String,
-    name: String, // OK
-    description: String, // OK
-    last_updated: String, // OK
-    available_count: Number, // ~~
-    price: String, // ~~
+    name: String,
+    description: String,
+    last_updated: String,
+    available_count: Number,
+    price: String,
     location: String,
-    image: String, // OK
+    image: String,
     seller_name: String,
-    star_rating: [String, Number], // OK
-    review_count: Number, // ~~
+    star_rating: [String, Number],
+    review_count: Number,
   },
   components: {
     StarRating,
