@@ -13,7 +13,7 @@ const state = () => ({
     last: 1,
     total: 0,
   },
-  queryHistory: {}, // should store cache and timestamp
+  queryHistory: {}, // TODO store cache and timestamp
 });
 
 const getters = {
@@ -41,7 +41,7 @@ const mutations = {
     };
   },
   ADD_HISTORY(state, { key, data }) {
-    state.queryHistory[key] = { data, timestamp: Date.now() };
+    state.queryHistory[key] = data;
   },
   REMOVE_HISTORY(state, key) {
     delete state.queryHistory[key];
@@ -72,6 +72,8 @@ const actions = {
     // builds the query string from the query paramaters
     const query = buildQuery(getters.query);
 
+    // TODO query history before calling api
+
     // calls api function to fetch reviews within query
     const res = await dispatch(
       "api",
@@ -90,6 +92,8 @@ const actions = {
     };
     commit("SET_PAGINATION", pagination);
     commit("SET_PRODUCTS", res.data);
+
+    // TODO save search on `queryHistory` for caching and set debouncer to expire query
 
     commit("SET_LOADING", false);
     // if extra action is needed, returns response
